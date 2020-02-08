@@ -1,0 +1,27 @@
+***** Reading a video from file - vision.VideoFileReader() *****
+
+MATLAB can read a variety of video file types such as MP4, AVI, MOV, etc.
+
+Let us begin by declaring an object of VideoFileReader class as:
+videoObj = vision.VideoFileReader('filename.extension', 'ImageColorSpace', 'ColorSpace');
+
+'ColorSpace' can be 'RGB' (read video frames as RGB) or 'intensity' (read video frames as Grayscale), etc.
+
+Now we can get information about video frame size and frame rate as:
+S = info(videoObj);
+width = S.VideoSize(1);
+height = S.VideoSize(end);
+frame_rate = S.VideoFrameRate;
+
+Now in order to read and display video frame by frame, we will first read the 1st frame from video and then run the loop displaying video frames simultaneously until all video frames have been displayed as:
+
+image_data = step(videoObj);
+while ~isDone(videoObj)
+    imshow(image_data);
+    image_data = step(videoObj);
+end
+
+Here image_data variable contains individual video frames which are being read from video file one by one and while loop continues until videoObj gives the signal that complete video has been read.
+
+Now release the object for reading video as:
+release(videoObj);

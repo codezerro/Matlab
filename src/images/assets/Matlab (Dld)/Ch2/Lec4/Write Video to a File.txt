@@ -1,0 +1,33 @@
+***** Writing a video to file in MATLAB *****
+
+MATLAB can read a variety of video file types such as MP4, AVI, MOV, etc. where a frame can be of type RGB, intensity, etc. So we will be reading a video from disk (previous lecture) and writing it to another file on the disk. This program will read a color frame video, convert it to grayscale frame and write frames to video file.
+
+Let us begin with first reading a video from file and getting its properties:
+videoRead = vision.VideoFileReader('filename.extension', 'ImageColorSpace', 'ColorSpace');
+
+As you can recall from previous lecture, 'ColorSpace' can be 'RGB' (read video frames as RGB) or 'intensity' (read video frames as Grayscale), etc.
+Now we can get information about video frame size and frame rate as:
+S = info(videoRead);
+width = S.VideoSize(1);
+height = S.VideoSize(end);
+frame_rate = S.VideoFrameRate;
+
+Now we will need to declare a VideoWriter object to write the video to disk and then open the object in order to be able to write the file onto disk.
+videoWrite = VideoWriter('video2.mp4');
+videoWrite.FrameRate = frame_rate;
+open(videoWrite);
+
+We set the output video frame rate equal to that of the input video.
+
+So till now we initialized objects for reading and writing videos. In order to write video, we will read input video frame by frame and write individual frames to the output video file as:
+image_data = step(videoRead);
+while ~isDone(videoRead)
+    writeVideo(videoWrite, image_data);
+    image_data = step(videoRead);
+end 
+
+Now release the object for reading video and close the output video file as:
+release(videoRead);
+close(videoWrite);
+
+So you can now browse your disk and view the written video file. We chose the video to be of lower resolution so as to speed up the performance during lecture because video reading & writing is a CPU intensive task.

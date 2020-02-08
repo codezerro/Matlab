@@ -1,0 +1,18 @@
+***** Writing an image - imwrite() *****
+
+MATLAB can write single channel (Grayscale) as well as multi-channel (Color) images. 
+
+Let us first read an image:
+A = imread('filename.extension');
+
+As we can recall from previous lecture, the return value A is an array containing the image data. If the file contains a grayscale image, A is an M-by-N array. If the file contains a truecolor image, A is an M-by-N-by-3 array. M and N are height (no. of rows) and width (no. of columns) respectively of the read image.
+File extension is the extension associated with a file type. For e.g., for JPEG files it is .jpg, for BMP files it is .bmp, etc.
+
+MATLAB supports writing images in a number of formats such as JPEG, BMP, TIFF, PNG, etc.
+
+Now let us say you read a color image and want to save it as grayscale image, this process can be performed as:
+
+A_gray = rgb2gray(A);
+imwrite(A_gray, 'filename.extension');
+
+Now you can open the file from your disk to see the original file and written file.

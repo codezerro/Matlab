@@ -1,0 +1,26 @@
+***** Reading an image - color or grayscale - imread() *****
+
+MATLAB can read images as color or grayscale. Color images are generally 3-channel images with separate channels for each color, 
+for eg., RGB image has individual color channels for R, G & B.
+
+MATLAB Function.
+A = imread('filename.extension');
+
+The return value A is an array containing the image data. If the file contains a grayscale image, A is an M-by-N array. If the file contains a truecolor image, A is an M-by-N-by-3 array. M and N are height (no. of rows) and width (no. of columns) respectively of the read image.
+
+File extension is the extension associated with a file type. For e.g., for JPEG files it is .jpg, for BMP files it is .bmp, etc.
+
+Now if you want to display the read image, the command would be:
+figure, imshow(A);
+
+Getting to know image height, width and number of channels.
+height = size(A, 1);
+width = size(A, 2);
+number_of_channels = size(A, 3); = 3 for RGB images and 1 for grayscale images
+
+COMPLETE CODE:
+A = imread('filename.extension');
+figure, imshow(A);
+height = size(A, 1);
+width = size(A, 2);
+number_of_channels = size(A, 3);
