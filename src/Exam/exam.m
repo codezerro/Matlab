@@ -130,3 +130,5 @@ subplot(4,3,9),imshow(image_one_padding),title('padding image one');
 subplot(4,3,10),imshow(image_two_padding),title('padding image two');
 subplot(4,3,11),imshow(image_three_padding),title('padding image three');
 subplot(4,3,12),imshow(image_four_padding),title('padding image four');
+
+
