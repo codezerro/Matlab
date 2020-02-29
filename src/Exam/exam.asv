@@ -1,0 +1,49 @@
+clc
+ clear all
+ close all
+%read image
+imageOne=imread('google.jpg');
+imageTwo=imread('imageTwo.jpg');
+
+%convert rgb to gray 
+imageOne_gray=rgb2gray(imageOne);
+imageTwo_gray=rgb2gray(imageTwo);
+
+%resize the image
+imageOne_size=imresize(imageOne_gray,[200 ,200 ]);
+imwrite(imageOne_size,'imageOne_size.jpg');
+%imageOne_size_gray=rgb2gray(imageOne_size);
+%read resize one image
+imageOne_final=imread('imageOne_size.jpg');
+%get the width and height
+[h1, w1]=size(imageOne_final);
+[h2, w2]=size(imageTwo_gray);
+
+%image subtract from 1 to 2
+image_sub=imsubtract(im2double(imageOne_final),im2double(imageTwo_gray));
+
+figure,
+imshow(image_sub);
+
+%image croping 
+
+col1=1;
+col2=h1/2;
+row1=1;
+row2=h2/2;
+
+%image crop 
+image_one=imcrop(image_sub,[col1 row1 col2 row2]);
+image_two=imcrop(image_sub,[col2+1 row1 w1 row2]);
+image_three=imcrop(image,[col1 row2+1 col2 h1]);
+image_four=imcrop(image,[col2+1 row2+1 w1 h1]);
+
+
+%show image using plot
+figure,
+subplot(4,2,1),imshow(image_one),title('First Image');
+subplot(4,2,2),imshow(image_two),title('Second Image');
+subplot(4,2,3),imshow(image_three),title('Third Image');
+subplot(4,2,4),imshow(image_four),title('Four Image');
+
+
