@@ -1,5 +1,7 @@
 %Padding image without lossing the size
-clc;
+clc
+clear all
+close all
 %load an image
 load_image=imread('lena.jpg');
 
@@ -14,15 +16,16 @@ back_image=rgb2gray(b_im);
 for ii = 1:129
     for jj = 1:129  
         if ( ii>=5 && jj>=5 && ii<=125 && jj<=125 ) 
-           back_image(ii,jj) = load_image(ii-4,jj-4); 
-           %sprintf("value of ones %d and value of gray %d",ones_image(ii,jj) ,gray_image(ii-4,jj-4))
+           back_image(ii,jj) = load_image(ii-4,jj-4);
+        else
+            back_image(ii,jj)=255;
         end
     end
 end
 
 
 %display image using plot
-figure,
+figure
 subplot(2,1,1),imshow(back_image);
 
 
